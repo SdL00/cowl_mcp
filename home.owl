@@ -1,0 +1,303 @@
+Prefix(:=<http://swot.sisinflab.poliba.it/home#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://swot.sisinflab.poliba.it/home>
+
+
+############################
+#   Classes
+############################
+
+# Class: :Togglable_device (:Togglable_device)
+
+SubClassOf(:Togglable_device :Device)
+
+# Class: :Settable_device (:Settable_device)
+
+SubClassOf(:Settable_device :Device)
+
+# Class: :Light (:Light)
+
+SubClassOf(:Light :Togglable_device)
+
+# Class: :Dimmable_light (:Dimmable_light)
+
+SubClassOf(:Dimmable_light ObjectIntersectionOf(:Light :Settable_device))
+
+# Class: :Appliance (:Appliance)
+
+SubClassOf(:Appliance :Togglable_device)
+
+# Class: :Air_conditioner (:Air_conditioner)
+
+SubClassOf(:Air_conditioner ObjectIntersectionOf(:Appliance :Settable_device))
+
+# Class: :Robot_vacuum (:Robot_vacuum)
+
+SubClassOf(:Robot_vacuum :Appliance)
+
+# Class: :Oven (:Oven)
+
+SubClassOf(:Oven ObjectIntersectionOf(:Appliance :Settable_device))
+
+# Class: :Coffee_machine (:Coffee_machine)
+
+SubClassOf(:Coffee_machine :Appliance)
+
+# Class: :Television (:Television)
+
+SubClassOf(:Television :Appliance)
+
+# Class: :Washing_machine (:Washing_machine)
+
+SubClassOf(:Washing_machine :Appliance)
+
+# Class: :Sensor (:Sensor)
+
+SubClassOf(:Sensor :Device)
+
+# Class: :Boolean_sensor (:Boolean_sensor)
+
+SubClassOf(:Boolean_sensor :Sensor)
+
+# Class: :Categorical_sensor (:Categorical_sensor)
+
+SubClassOf(:Categorical_sensor :Sensor)
+
+# Class: :Numeric_sensor (:Numeric_sensor)
+
+SubClassOf(:Numeric_sensor :Sensor)
+
+# Class: :Occupancy_sensor (:Occupancy_sensor)
+
+SubClassOf(:Occupancy_sensor :Boolean_sensor)
+
+# Class: :Smoke_sensor (:Smoke_sensor)
+
+SubClassOf(:Smoke_sensor :Boolean_sensor)
+
+# Class: :Temperature_sensor (:Temperature_sensor)
+
+SubClassOf(:Temperature_sensor :Numeric_sensor)
+
+# Class: :Humidity_sensor (:Humidity_sensor)
+
+SubClassOf(:Humidity_sensor :Numeric_sensor)
+
+# Class: :Brightness_sensor (:Brightness_sensor)
+
+SubClassOf(:Brightness_sensor :Categorical_sensor)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: :Bedroom (:Bedroom)
+
+ClassAssertion(:Room :Bedroom)
+ObjectPropertyAssertion(:contains :Bedroom :Ceiling_light_1)
+ObjectPropertyAssertion(:contains :Bedroom :Lamp_1)
+ObjectPropertyAssertion(:contains :Bedroom :Air_conditioner_2)
+ObjectPropertyAssertion(:contains :Bedroom :Occupancy_sensor_3)
+ObjectPropertyAssertion(:contains :Bedroom :Humidity_sensor_1)
+
+# Individual: :Kitchen (:Kitchen)
+
+ClassAssertion(:Room :Kitchen)
+ObjectPropertyAssertion(:contains :Kitchen :Ceiling_light_3)
+ObjectPropertyAssertion(:contains :Kitchen :Oven_1)
+ObjectPropertyAssertion(:contains :Kitchen :Coffee_machine_1)
+ObjectPropertyAssertion(:contains :Kitchen :Temperature_sensor_1)
+ObjectPropertyAssertion(:contains :Kitchen :Occupancy_sensor_2)
+ObjectPropertyAssertion(:contains :Kitchen :Smoke_sensor_1)
+
+# Individual: :Living_room (:Living_room)
+
+ClassAssertion(:Room :Living_room)
+ObjectPropertyAssertion(:contains :Living_room :Ceiling_light_5)
+ObjectPropertyAssertion(:contains :Living_room :Lamp_3)
+ObjectPropertyAssertion(:contains :Living_room :Air_conditioner_1)
+ObjectPropertyAssertion(:contains :Living_room :Television_1)
+ObjectPropertyAssertion(:contains :Living_room :Occupancy_sensor_1)
+ObjectPropertyAssertion(:contains :Living_room :Brightness_sensor_1)
+
+# Individual: :Bathroom (:Bathroom)
+
+ClassAssertion(:Room :Bathroom)
+ObjectPropertyAssertion(:contains :Bathroom :Ceiling_light_4)
+ObjectPropertyAssertion(:contains :Bathroom :Robot_vacuum_1)
+ObjectPropertyAssertion(:contains :Bathroom :Washing_machine_1)
+ObjectPropertyAssertion(:contains :Bathroom :Occupancy_sensor_5)
+
+# Individual: :Study (:Study)
+
+ClassAssertion(:Room :Study)
+ObjectPropertyAssertion(:contains :Study :Ceiling_light_2)
+ObjectPropertyAssertion(:contains :Study :Lamp_2)
+ObjectPropertyAssertion(:contains :Study :Occupancy_sensor_4)
+
+# Individual: :Ceiling_light_1 (:Ceiling_light_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Settable_device :Light :Dimmable_light) :Ceiling_light_1)
+ObjectPropertyAssertion(:located_in :Ceiling_light_1 :Bedroom)
+DataPropertyAssertion(:setting :Ceiling_light_1 "20"^^xsd:integer)
+DataPropertyAssertion(:unit :Ceiling_light_1 "percent")
+DataPropertyAssertion(:state :Ceiling_light_1 "off")
+
+# Individual: :Ceiling_light_2 (:Ceiling_light_2)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Light) :Ceiling_light_2)
+ObjectPropertyAssertion(:located_in :Ceiling_light_2 :Study)
+DataPropertyAssertion(:state :Ceiling_light_2 "off")
+
+# Individual: :Ceiling_light_3 (:Ceiling_light_3)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Light) :Ceiling_light_3)
+ObjectPropertyAssertion(:located_in :Ceiling_light_3 :Kitchen)
+DataPropertyAssertion(:state :Ceiling_light_3 "on")
+
+# Individual: :Ceiling_light_4 (:Ceiling_light_4)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Light) :Ceiling_light_4)
+ObjectPropertyAssertion(:located_in :Ceiling_light_4 :Bathroom)
+DataPropertyAssertion(:state :Ceiling_light_4 "off")
+
+# Individual: :Ceiling_light_5 (:Ceiling_light_5)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Light) :Ceiling_light_5)
+ObjectPropertyAssertion(:located_in :Ceiling_light_5 :Living_room)
+DataPropertyAssertion(:state :Ceiling_light_5 "off")
+
+# Individual: :Lamp_1 (:Lamp_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Settable_device :Light :Dimmable_light) :Lamp_1)
+ObjectPropertyAssertion(:located_in :Lamp_1 :Bedroom)
+DataPropertyAssertion(:setting :Lamp_1 "20"^^xsd:integer)
+DataPropertyAssertion(:unit :Lamp_1 "percent")
+DataPropertyAssertion(:state :Lamp_1 "off")
+
+# Individual: :Lamp_2 (:Lamp_2)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Settable_device :Light :Dimmable_light) :Lamp_2)
+ObjectPropertyAssertion(:located_in :Lamp_2 :Study)
+DataPropertyAssertion(:setting :Lamp_2 "50"^^xsd:integer)
+DataPropertyAssertion(:unit :Lamp_2 "percent")
+DataPropertyAssertion(:state :Lamp_2 "on")
+
+# Individual: :Lamp_3 (:Lamp_3)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Light) :Lamp_3)
+ObjectPropertyAssertion(:located_in :Lamp_3 :Living_room)
+DataPropertyAssertion(:state :Lamp_3 "off")
+
+# Individual: :Air_conditioner_1 (:Air_conditioner_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Settable_device :Appliance :Air_conditioner) :Air_conditioner_1)
+ObjectPropertyAssertion(:located_in :Air_conditioner_1 :Living_room)
+DataPropertyAssertion(:setting :Air_conditioner_1 "20"^^xsd:integer)
+DataPropertyAssertion(:unit :Air_conditioner_1 "C")
+DataPropertyAssertion(:state :Air_conditioner_1 "on")
+
+# Individual: :Air_conditioner_2 (:Air_conditioner_2)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Settable_device :Appliance :Air_conditioner) :Air_conditioner_2)
+ObjectPropertyAssertion(:located_in :Air_conditioner_2 :Bedroom)
+DataPropertyAssertion(:setting :Air_conditioner_2 "16"^^xsd:integer)
+DataPropertyAssertion(:unit :Air_conditioner_2 "C")
+DataPropertyAssertion(:state :Air_conditioner_2 "off")
+
+# Individual: :Robot_vacuum_1 (:Robot_vacuum_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Appliance :Robot_vacuum) :Robot_vacuum_1)
+ObjectPropertyAssertion(:located_in :Robot_vacuum_1 :Bathroom)
+DataPropertyAssertion(:state :Robot_vacuum_1 "off")
+
+# Individual: :Oven_1 (:Oven_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Settable_device :Appliance :Oven) :Oven_1)
+ObjectPropertyAssertion(:located_in :Oven_1 :Kitchen)
+DataPropertyAssertion(:setting :Oven_1 "180"^^xsd:integer)
+DataPropertyAssertion(:unit :Oven_1 "C")
+DataPropertyAssertion(:state :Oven_1 "on")
+
+# Individual: :Coffee_machine_1 (:Coffee_machine_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Appliance :Coffee_machine) :Coffee_machine_1)
+ObjectPropertyAssertion(:located_in :Coffee_machine_1 :Kitchen)
+DataPropertyAssertion(:state :Coffee_machine_1 "off")
+
+# Individual: :Television_1 (:Television_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Appliance :Television) :Television_1)
+ObjectPropertyAssertion(:located_in :Television_1 :Living_room)
+DataPropertyAssertion(:state :Television_1 "on")
+
+# Individual: :Washing_machine_1 (:Washing_machine_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Togglable_device :Appliance :Washing_machine) :Washing_machine_1)
+ObjectPropertyAssertion(:located_in :Washing_machine_1 :Bathroom)
+DataPropertyAssertion(:state :Washing_machine_1 "on")
+
+# Individual: :Temperature_sensor_1 (:Temperature_sensor_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Numeric_sensor :Temperature_sensor) :Temperature_sensor_1)
+ObjectPropertyAssertion(:located_in :Temperature_sensor_1 :Kitchen)
+DataPropertyAssertion(:value :Temperature_sensor_1 "20"^^xsd:integer)
+DataPropertyAssertion(:unit :Temperature_sensor_1 "C")
+
+# Individual: :Occupancy_sensor_1 (:Occupancy_sensor_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Boolean_sensor :Occupancy_sensor) :Occupancy_sensor_1)
+ObjectPropertyAssertion(:located_in :Occupancy_sensor_1 :Living_room)
+DataPropertyAssertion(:value :Occupancy_sensor_1 "false"^^xsd:boolean)
+
+# Individual: :Occupancy_sensor_2 (:Occupancy_sensor_2)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Boolean_sensor :Occupancy_sensor) :Occupancy_sensor_2)
+ObjectPropertyAssertion(:located_in :Occupancy_sensor_2 :Kitchen)
+DataPropertyAssertion(:value :Occupancy_sensor_2 "false"^^xsd:boolean)
+
+# Individual: :Occupancy_sensor_3 (:Occupancy_sensor_3)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Boolean_sensor :Occupancy_sensor) :Occupancy_sensor_3)
+ObjectPropertyAssertion(:located_in :Occupancy_sensor_3 :Bedroom)
+DataPropertyAssertion(:value :Occupancy_sensor_3 "true"^^xsd:boolean)
+
+# Individual: :Occupancy_sensor_4 (:Occupancy_sensor_4)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Boolean_sensor :Occupancy_sensor) :Occupancy_sensor_4)
+ObjectPropertyAssertion(:located_in :Occupancy_sensor_4 :Study)
+DataPropertyAssertion(:value :Occupancy_sensor_4 "true"^^xsd:boolean)
+
+# Individual: :Occupancy_sensor_5 (:Occupancy_sensor_5)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Boolean_sensor :Occupancy_sensor) :Occupancy_sensor_5)
+ObjectPropertyAssertion(:located_in :Occupancy_sensor_5 :Bathroom)
+DataPropertyAssertion(:value :Occupancy_sensor_5 "false"^^xsd:boolean)
+
+# Individual: :Smoke_sensor_1 (:Smoke_sensor_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Boolean_sensor :Smoke_sensor) :Smoke_sensor_1)
+ObjectPropertyAssertion(:located_in :Smoke_sensor_1 :Kitchen)
+DataPropertyAssertion(:value :Smoke_sensor_1 "true"^^xsd:boolean)
+
+# Individual: :Humidity_sensor_1 (:Humidity_sensor_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Numeric_sensor :Humidity_sensor) :Humidity_sensor_1)
+ObjectPropertyAssertion(:located_in :Humidity_sensor_1 :Bedroom)
+DataPropertyAssertion(:value :Humidity_sensor_1 "40"^^xsd:integer)
+DataPropertyAssertion(:unit :Humidity_sensor_1 "percent")
+
+# Individual: :Brightness_sensor_1 (:Brightness_sensor_1)
+
+ClassAssertion(ObjectIntersectionOf(:Device :Sensor :Categorical_sensor :Brightness_sensor) :Brightness_sensor_1)
+ObjectPropertyAssertion(:located_in :Brightness_sensor_1 :Living_room)
+DataPropertyAssertion(:value :Brightness_sensor_1 "low")
+
+)
